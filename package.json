@@ -1,0 +1,27 @@
+{
+  "name": "weather-app",
+  "version": "1.0.0",
+  "description": "a real-time weather notification service that sends weather updates to users based on their location preferences. Users should be able to subscribe to specific locations and receive weather updates whenever there are changes in weather conditions.",
+  "main": "index.js",
+  "scripts": {
+    "test": "",
+    "dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ManalMagdy-2000/Weather-App.git"
+  },
+  "author": "Manal Magdy Eid Khalil",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ManalMagdy-2000/Weather-App/issues"
+  },
+  "homepage": "https://github.com/ManalMagdy-2000/Weather-App#readme",
+  "dependencies": {
+    "axios": "^1.4.0",
+    "body-parser": "^1.20.2",
+    "express": "^4.18.2",
+    "nodemailer": "^6.9.4",
+    "nodemon": "^3.0.1"
+  }
+}
