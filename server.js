@@ -2,8 +2,13 @@ const express = require("express");
 const bodyParser  = require("body-parser");
 const app = express();
 const axios = require("axios");
-//const SSE = require("sse");
-
+const SSE = require("sse");
+const cron = require("node-cron");
+const WebSocket = require("ws");
+/*
+When there is a change in weather conditions for a subscribed location, send a 
+notification to the subscribed clients via the SSE endpoint and WebSocket connection
+*/
 const PORT = 8080 ;
 const WEATHER_API_KEY ="2d39a0f72e2a31d915c96fb677ff378f";
 const subscribtions ={};
