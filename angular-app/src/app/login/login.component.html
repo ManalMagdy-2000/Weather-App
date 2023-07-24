@@ -1,0 +1,17 @@
+<div class="weather-updates-background">
+  <div class="container">
+    <mat-card class="weather-updates-card">
+      <h2 class="weather-updates-heading">Weather Updates</h2>
+      <form (ngSubmit)="loginUser()">
+        <mat-form-field class="weather-input">
+          <input matInput placeholder="Username" [(ngModel)]="credentials.username" name="username" required>
+        </mat-form-field>
+        <mat-form-field class="weather-input">
+          <input matInput placeholder="Password" [(ngModel)]="credentials.password" name="password" type="password" required>
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="submit">Login</button>
+        <p class="weather-register-link">Haven't registered yet? <a routerLink="/register">Register here</a></p>
+      </form>
+    </mat-card>
+  </div>
+</div>

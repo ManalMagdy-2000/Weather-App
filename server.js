@@ -1,5 +1,4 @@
 const express = require("express");
-//const usersRoute = require("./routes");
 const bodyParser  = require("body-parser");
 const app = express();
 const expressWs = require("express-ws");
@@ -8,6 +7,8 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const jwtSecretKey = "#Manal#123#";
 const db = require("./db")
+const cors = require('cors');
+
 
 const PORT = 6060 ;
 const WEATHER_API_KEY ="2d39a0f72e2a31d915c96fb677ff378f";
@@ -17,6 +18,12 @@ expressWs(app);
 
 
 app.use(bodyParser.json());
+
+const corsOptions = {
+  origin: 'http://localhost:4200'
+};
+app.use(cors(corsOptions));
+
 
 // Create a new user
 app.post('/users', async (req, res) => {
@@ -82,12 +89,12 @@ app.post('/users', async (req, res) => {
     }
   });
   
-  // Delete a user by ID
-  app.delete('/users/:id', async (req, res) => {
-    const { id } = req.params;
+  // Delete a user by username
+  app.delete('/users/:username', async (req, res) => {
+    const { username } = req.params;
     try {
-      const queryText = 'DELETE FROM users WHERE id = $1 RETURNING *';
-      const values = [id];
+      const queryText = 'DELETE FROM users WHERE username = $1 RETURNING *';
+      const values = [username];
       const result = await db.query(queryText, values);
       if (result.rows.length === 0) {
         res.status(404).send('User not found');
