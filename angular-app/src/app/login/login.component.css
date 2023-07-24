@@ -1,53 +1,52 @@
-/* Styling the background with a weather theme color */
+
 .weather-updates-background {
-  background-color: #73b9ff; /* Use a sky blue color for a weather theme */
+  background-color: #73b9ff;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-/* Styling the login card with a weather theme */
+
 .weather-updates-card {
   padding: 40px;
   width: 350px;
   text-align: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
-  background-color: #fff; /* Use a white background for the card */
-  color: #333; /* Dark gray text color for better visibility */
+  background-color: #fff;
+  color: #333;
 }
 
-/* Center the card horizontally within the container */
 .container {
   display: flex;
   justify-content: center;
 }
 
-/* Style the login form heading with weather theme colors */
+
 .weather-updates-heading {
-  color: #73b9ff; /* Use the sky blue color for the heading */
+  color: #73b9ff;
   margin-bottom: 20px;
 }
 
-/* Style the login form inputs with weather theme colors */
+
 .weather-input {
   width: 100%;
   margin-bottom: 15px;
 }
 
-/* Style the login button with weather theme colors */
+
 button[type="submit"] {
-  background-color: #ff9800; /* Use a sun-like orange color for the button */
+  background-color: #ff9800;
 }
 
-/* Style the register link with weather theme colors */
+
 .weather-register-link {
-  color: #333; /* Dark gray text color for better visibility */
+  color: #333;
   margin-top: 15px;
 }
 
-/* Change the appearance of the link on hover */
+
 .weather-register-link a:hover {
-  color: #ffa726; /* Lighter shade of orange on hover */
+  color: #ffa726;
 }

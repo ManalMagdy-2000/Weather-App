@@ -17,7 +17,6 @@ export class LoginComponent {
     this.apiService.loginUser(this.credentials).subscribe(
       (response: any) => {
         console.log('Login successful:', response);
-        // Store the token in local storage or use a token service
         this.router.navigate(['/dashboard']);
       },
       (error) => {
