@@ -50,3 +50,7 @@ button[type="submit"] {
 .weather-register-link a:hover {
   color: #ffa726;
 }
+a{
+  text-decoration: none;
+  color : #73b9ff;
+}
