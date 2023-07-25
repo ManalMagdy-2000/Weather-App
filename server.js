@@ -148,8 +148,47 @@ app.post('/users', async (req, res) => {
       }
   });
   
+// Subscribe a user
+app.post('/subscribe', async (req, res) => {
+  const { username, location } = req.body;
+  if (!username || !location) {
+    res.status(400).send("User information required.");
+    return;
+  }
 
+  try {
+    const queryText = 'INSERT INTO user_subscriptions (username, location) VALUES ($1, $2)';
+    const values = [username, location];
+    await db.query(queryText, values);
+    subscriptions[username] = { location }; // Update the subscriptions object
+    res.status(200).send("User subscribed successfully!");
+  } catch (error) {
+    console.error('Error subscribing user:', error);
+    res.status(500).send('Internal Server Error');
+  }
+});
 
+// Unsubscribe a user
+app.post('/unsubscribe', async (req, res) => {
+  const { username } = req.body;
+  if (!username) {
+    res.status(400).send("Username not provided.");
+    return;
+  }
+
+  try {
+    const queryText = 'DELETE FROM user_subscriptions WHERE username = $1';
+    const values = [username];
+    await db.query(queryText, values);
+    delete subscriptions[username]; // Remove the user from the subscriptions object
+    res.status(200).send("User unsubscribed successfully.");
+  } catch (error) {
+    console.error('Error unsubscribing user:', error);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+/*
 
   app.post('/subscribe' , (req, res) =>{
     const { username, location } = req.body;
@@ -175,6 +214,7 @@ app.post('/unsubscribe' , (req , res) => {
     subscriptions[username].location = undefined;
     res.status(200).send("User unsubscribed successfully.");
 })
+*/
 
 
 

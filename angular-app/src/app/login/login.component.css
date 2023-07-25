@@ -54,3 +54,6 @@ a{
   text-decoration: none;
   color : #73b9ff;
 }
+.weather-error-message , mat-error {
+  color: red;
+}

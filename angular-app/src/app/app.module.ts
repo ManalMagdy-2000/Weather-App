@@ -2,7 +2,7 @@ import { MatSnackBarModule} from '@angular/material/snack-bar';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { RegistrationComponent } from './registration/registration.component';
@@ -12,6 +12,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MatToolbarModule} from '@angular/material/toolbar';
+
 
 
 @NgModule({
@@ -31,6 +33,8 @@ import { MatCardModule } from '@angular/material/card';
     MatButtonModule,
     MatCardModule ,
     MatSnackBarModule ,
+    MatToolbarModule ,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
