@@ -49,3 +49,6 @@ button[type="submit"] {
 .weather-register-link a:hover {
   color: #ffa726;
 }
+.alert-message{
+  color: red;
+}

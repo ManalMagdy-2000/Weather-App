@@ -1,18 +1,23 @@
 <div class="weather-updates-background">
   <mat-card class="weather-updates-card">
     <h2 class="weather-updates-heading">Registration</h2>
-    <form (ngSubmit)="registerUser()">
+    <form [formGroup]="registrationForm" (ngSubmit)="registerUser()">
       <mat-form-field class="weather-input">
-        <input matInput placeholder="Username" [(ngModel)]="user.username" name="username" required>
+        <input matInput placeholder="Username" formControlName="username" required>
+        <mat-error *ngIf="username.invalid && (username.dirty || username.touched)">Username is required</mat-error>
       </mat-form-field>
       <mat-form-field class="weather-input">
-        <input matInput placeholder="Email" [(ngModel)]="user.email" name="email" required>
+        <input matInput placeholder="Email" formControlName="email" required>
+        <mat-error *ngIf="email.invalid && (email.dirty || email.touched)">Invalid email format</mat-error>
       </mat-form-field>
       <mat-form-field class="weather-input">
-        <input matInput placeholder="Password" [(ngModel)]="user.password" name="password" type="password" required>
+        <input matInput placeholder="Password" formControlName="password" type="password" required>
+        <mat-error *ngIf="password.invalid && (password.dirty || password.touched)">Invalid password format (minimum 6 characters)</mat-error>
       </mat-form-field>
-      <button mat-raised-button color="primary" type="submit" style="color: white
-      ; font-weight: bold; font-family : 'Times New Roman', Times, serif">Register</button>
+      <button mat-raised-button color="primary" type="submit" style="color: white; font-weight: bold; font-family: 'Times New Roman', Times, serif">Register</button>
+      <div class="alert-message" [ngClass]="{ 'error-message': alertMessage }">
+        {{ alertMessage }}
+      </div>
     </form>
     <p class="weather-register-link">Already registered? <a routerLink="/login">Login here</a></p>
   </mat-card>

@@ -25,22 +25,36 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 
-// Create a new user
+
 app.post('/users', async (req, res) => {
-    const { username, email, password } = req.body;
-    try {
-      const queryText = 'INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING *';
-      const values = [username, email, password];
-      const result = await db.query(queryText, values);
-      res.status(201).json(result.rows[0]);
-    } catch (error) {
-      console.error('Error creating user:', error);
-      res.status(500).send('Internal Server Error');
+  const { username, email, password } = req.body;
+
+  const passwordPattern = /^[a-zA-Z0-9]{6,}$/;
+
+  try {
+    const checkUsernameQuery = 'SELECT * FROM users WHERE username = $1';
+    const checkUsernameResult = await db.query(checkUsernameQuery, [username]);
+    if (checkUsernameResult.rows.length > 0) {
+      res.status(400).json({ error: 'Username is already taken.' });
+      return;
     }
-  });
+    if (!passwordPattern.test(password)) {
+      res.status(400).json({ error: 'Invalid password format. Password must be at least 6 characters long and contain only letters and numbers.' });
+      return;
+    }
+    const insertUserQuery = 'INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING *';
+    const values = [username, email, password];
+    const result = await db.query(insertUserQuery, values);
+    res.status(201).json(result.rows[0]);
+  } catch (error) {
+    console.error('Error creating user:', error);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
 
   
-  // Get all users
+
   app.get('/users', async (req, res) => {
     try {
       const queryText = 'SELECT * FROM users';
@@ -52,7 +66,7 @@ app.post('/users', async (req, res) => {
     }
   });
   
-  // Get a single user by ID
+
   app.get('/users/:id', async (req, res) => {
     const { id } = req.params;
     try {
@@ -70,7 +84,7 @@ app.post('/users', async (req, res) => {
     }
   });
   
-  // Update a user by ID
+
   app.put('/users/:id', async (req, res) => {
     const { id } = req.params;
     const { username, email, password } = req.body;
@@ -89,7 +103,7 @@ app.post('/users', async (req, res) => {
     }
   });
   
-  // Delete a user by username
+ 
   app.delete('/users/:username', async (req, res) => {
     const { username } = req.params;
     try {
@@ -106,6 +120,13 @@ app.post('/users', async (req, res) => {
       res.status(500).send('Internal Server Error');
     }
   });
+
+  app.delete('/users' , (req , res) => {
+    const queryText = 'DELETE FROM users'
+    db.query(queryText);
+    res.status(200).send('all users deleted')
+
+  })
   
 
 
@@ -148,7 +169,7 @@ app.post('/users', async (req, res) => {
       }
   });
   
-// Subscribe a user
+
 app.post('/subscribe', async (req, res) => {
   const { username, location } = req.body;
   if (!username || !location) {
@@ -168,7 +189,7 @@ app.post('/subscribe', async (req, res) => {
   }
 });
 
-// Unsubscribe a user
+
 app.post('/unsubscribe', async (req, res) => {
   const { username } = req.body;
   if (!username) {
